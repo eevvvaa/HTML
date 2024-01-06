@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>進擊的巨人</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="Content-Type" content="text/html"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+	
+
+    <!-- javascript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.js"></script>
+  
+	<!-- Compiled and minified CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+	<!-- Compiled and minified JavaScript -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+	<!-- CSS  -->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+	<link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  
+	<!-- 利用Google Visualization讀取Google Sheet https://www.labnol.org/code/google-sheet-d3js-visualization-200608 -->
+	<script src="https://www.gstatic.com/charts/loader.js"></script>
+	
+	<!-- 資料庫  -->
+	<script>
+	    // https://developers.google.com/chart/interactive/docs/quick_start
+		// Load the Visualization API and the corechart package.
+		google.charts.load('current', {'packages':['corechart']});
+		// Set a callback to run when the Google Visualization API is loaded.	
+		google.charts.setOnLoadCallback(init);
+		
+		function init() {
+		  // 這個例子使用的試算表是 https://docs.google.com/spreadsheets/d/1QScI5d56Kh-LGywY4WR6EvRGPcalFQYUAdqMxbFVDvk/copy
+		  // 將上述試算表另存副本後，你要在自己的雲端硬碟將該試算表設定成[知道連結的使用者都能查看]。
+		  // 然後讓程式讀取 https://docs.google.com/spreadsheets/d/瀏覽器網址列上的網址擷取序號部分/gviz/tq?sheet=工作表名稱
+		  // 也就是將下列的 1QScI5d56Kh-LGywY4WR6EvRGPcalFQYUAdqMxbFVDvk 更換成自己的檔案序號，以及最後部分指讀取哪個工作表。
+		  var url =
+			'https://docs.google.com/spreadsheets/d/13XmHUwHjroFpGp7QY6z6hXBU40MFar0N2W5qKlFb45Q/gviz/tq?sheet=工作表1';
+		  var query = new google.visualization.Query(url);
+		  query.setQuery('select *');
+		  query.send(processSheetsData);
+		}	
+		
+		function processSheetsData(response) {
+		  var data = response.getDataTable();
+		  var columns = data.getNumberOfColumns();
+		  var rows = data.getNumberOfRows();
+		  
+		  var s = "";
+		  for (var r=0 ; r<rows ; r++) {
+		  
+			  s=s+ `<div class="container">
+						<div class="col s12 m6 l4">
+							<div class="card">
+								<div class="card-image">
+									<img src="${data.getFormattedValue(r,5)}" "width="200" height="200">
+								</div>
+								<div class="card-content">
+									<font face="MV Boli">
+										<p>${data.getFormattedValue(r,1)}</p>
+									</font>
+								</div>
+								<div class="card-action">
+									<a href="giant.html?id=${data.getFormattedValue(r,0)}">查看更多</a>
+								</div>
+							</div>
+						</div>
+					</div>`;
+				}
+		  document.getElementById("home").innerHTML = s;
+		}
+		
+		<!-- 留言板  -->
+		function formresponse() {
+			var message = document.forms["myform"]["message"].value;
+			if (message==null || message=="")
+			   {
+				alert("留言不可為空");
+				return false;
+			   }
+			else
+			   {
+				var MySubmit = "https://docs.google.com/forms/d/e/1FAIpQLSe2QP-Gvgvw5ApKI7ntLA72mm7teJlxVDn9dQl9elO2fBSfQQ/formResponse?entry.2122417722=" + message + "&submit=Submit";
+				var NewOpen = window.open(MySubmit);
+				
+				document.forms["myform"]["message"].value = "";
+			   }
+		}
+		
+	</script>
+		
+	<!-- CSS  -->
+	<style>
+		<!-- 城牆  -->
+		.responsive-img {
+		  max-width: 100%;
+		  height: auto;
+		}
+
+		.bg-white {
+		  background-color: #ffffff;
+		}
+
+		.shadow-lg {
+		  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
+		}
+		<!-- 留言板  -->
+		
+		.form-control{
+		color: #FFFFFF;
+		transition: 0.5s;
+		}
+		
+		.form-control:hover {
+		background-color: #FFFFFF;
+		color: black;
+		}
+		
+		.btn {
+		width: 70%;
+		font-size: 20px;
+		margin: 20px 0px 20px 0px;
+		background-color: #3B5998;
+		color: #FFFFFF;
+		border-radius: 20px;
+		transition: 0.5s;
+		}
+
+		.btn:hover {
+		background-color: #FFFFFF;
+		color: black;
+		}
+		
+		textarea {
+		  height: 90px;
+		}
+	</style>
+	
+</head>
+
+
+
+<body id='section_1'>
+
+	<script>
+	alert('此網站只是個人對於進巨「動漫」的不專業分享，若資訊有誤進請見諒。會暴雷到部分的結局內容，若不想被暴雷的話建議先行關閉此網頁，謝謝');
+	</script>
+
+	<!--   頭   -->
+	<div class="navbar-fixed">
+	  <nav style="background-color: #A8DADC;" role="navigation">
+		<div class="nav-wrapper container">
+		  <a href="home.html" class="brand-logo">進撃の巨人</a>
+			<ul id="nav-mobile" class="right hide-on-med-and-down">
+				<li class="nav-item">
+					<a class="nav-link click-scroll" href="#section_1"><small class="small-title"><strong class="text-warning">01</strong></small> 首頁</a>
+				</li>
+
+				<li class="nav-item">
+					<a class="nav-link click-scroll" href="#section_2"><small class="small-title"><strong class="text-warning">02</strong></small> 小知識</a>
+				</li>
+
+				<li class="nav-item">
+					<a class="nav-link click-scroll" href="#section_3"><small class="small-title"><strong class="text-warning">03</strong></small> 角色介紹</a>
+				</li>
+
+				<li class="nav-item">
+					<a class="nav-link click-scroll" href="#section_4"><small class="small-title"><strong class="text-warning">04</strong></small> 九大巨人</a>
+				</li>
+				
+				<li class="nav-item">
+					<a class="nav-link click-scroll" href="#section_5"><small class="small-title"><strong class="text-warning">05</strong></small> 留言區</a>
+				</li>
+			</ul>
+		</div>
+	  </nav>
+	</div>
+
+	<!-- banner1 -->
+	<section>
+		<div class="parallax-container valign-wrapper">
+			<div class="parallax"><img src="images/banner1.jpg"></div>
+		</div>
+	</section>
+  
+<br><br  id="section_2"><br>
+
+	<!-- 小知識 -->
+	<section class="about section-padding">
+  
+		<!-- 訊息  -->
+		<div class="container">
+			<div class="section">
+			  <div class="row">
+				<div class="col s12 center">
+				  <h3><i class="mdi-content-send brown-text"></i></h3>
+				  <h3>! ! 賀 ! !</h3>
+				  <h5 class="center" lighten>官方宣布《進擊的巨人》完結篇「後篇」即將在2023秋季11月5日凌晨登場。</h5>
+				</div>
+			  </div>
+			</div>
+		</div>
+
+		<!--  想分享結尾的相關影片  -->
+		<div class="container">
+			<div class="section">
+				<div class="col s12 m6 l4 center">
+					<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/E7WytLM2KvY?si=gFRzNWhqZbOvP8eu" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
+					</iframe>
+				</div>
+			</div>
+		</div>
+<br>
+		<!--  進巨歷史(刊登時間)-表格 -->
+		<div class="container">
+			<div class="row">
+				<div class="col s12 center">
+					<h5>集數列表</h5>
+				</div>
+			</div>
+			
+			<table>
+				<thead>
+				  <tr>
+					  <th>季數</th>
+					  <th>集數</th>
+					  <th>上映時間</th>
+					  <th>季終時間</th>
+					  <th>製作公司</th>
+				  </tr>
+				</thead>
+
+				<tbody>
+				  <tr>
+					<td>第一季</td>
+					<td><a href="https://zh.wikipedia.org/wiki/%E9%80%B2%E6%93%8A%E7%9A%84%E5%B7%A8%E4%BA%BA%E9%9B%86%E6%95%B8%E5%88%97%E8%A1%A8#%E7%AC%AC%E4%B8%80%E5%AD%A3%EF%BC%882013%E5%B9%B4%EF%BC%89" target="_blank">25</a></td>
+					<td>2013年4月7日</td>
+					<td>2013年9月29日</td>
+					<td><a href="https://www.witstudio.co.jp/" target="_blank">WIT STUDIO</a></td>
+				  </tr>
+				  <tr>
+					<td>第二季</td>
+					<td><a href="https://zh.wikipedia.org/wiki/%E9%80%B2%E6%93%8A%E7%9A%84%E5%B7%A8%E4%BA%BA%E9%9B%86%E6%95%B8%E5%88%97%E8%A1%A8#%E7%AC%AC%E4%BA%8C%E5%AD%A3%EF%BC%882017%E5%B9%B4%EF%BC%89" target="_blank">12</a></td>
+					<td>2017年4月1日</td>
+					<td>2017年6月17日</td>
+					<td><a href="https://www.witstudio.co.jp/" target="_blank">WIT STUDIO</a></td>
+				  </tr>
+				  <tr>
+					<td>第三季</td>
+					<td><a href="https://zh.wikipedia.org/wiki/%E9%80%B2%E6%93%8A%E7%9A%84%E5%B7%A8%E4%BA%BA%E9%9B%86%E6%95%B8%E5%88%97%E8%A1%A8#%E7%AC%AC%E4%B8%89%E5%AD%A3%EF%BC%882018-2019%E5%B9%B4%EF%BC%89" target="_blank">22</a>(第一部:1-12+第二部:13-22)</td>
+					<td>2018年7月23日</td>
+					<td>2019年7月1日</td>
+					<td><a href="https://www.witstudio.co.jp/" target="_blank">WIT STUDIO</a></td>
+				  </tr>
+				  <tr>
+					<td>第四季</td>
+					<td><a href="https://zh.wikipedia.org/wiki/%E9%80%B2%E6%93%8A%E7%9A%84%E5%B7%A8%E4%BA%BA%E9%9B%86%E6%95%B8%E5%88%97%E8%A1%A8#%E7%AC%AC%E5%9B%9B%E5%AD%A3%EF%BC%9A%E6%9C%80%E7%B5%82%E5%AD%A3%EF%BC%882020-2023%E5%B9%B4%EF%BC%89" target="_blank">35</a>(第一部:1-16+第二部:17-28+完結篇(前篇):29-31+完結篇(後篇):32-35)</td>
+					<td>2020年12月7日</td>
+					<td>2023年11月5日</td>
+					<td><a href="https://www.mappa.co.jp/" target="_blank">MAPPA</a></td>
+				  </tr>
+				</tbody>
+			</table>
+		</div>
+<br><br>
+		<!--   城牆   -->
+		<div class="container">
+			<div class="row">
+				<div class="col s12 m6">
+					<img class="materialboxed responsive-img" src="images/wall.png">
+				</div>
+				<div class="col s12 m6" >
+					<div class="card-panel  bg-white shadow-lg">
+					<h3><font color="#2E1F1F">牆-被限制的自由</font></h3>
+					<p class="left-align light"><font color="#2E1F1F">第145代弗裏茨王：卡爾·弗利茲因為厭倦了戰爭，因此佯裝敗逃，率領了大多數的艾爾迪亞人和包含少數非艾爾迪亞的民族一併遷徙到帕拉迪島上，以巨人之力，操控巨人建造了三道城牆。
+					城牆總共有三道，由外往內分別為「瑪利亞之牆」、「羅塞之牆」及「席納之牆」，分別取自始祖尤米爾三個女兒瑪利亞（Maria）、羅塞（Rose）和席納(Sina）的名字。每一道城牆之間的範圍就是人類的聚居地，總面積大約七十二萬平方公里。
+					就這樣居住在帕拉迪島上的人類在百年的安寧下，所生活的城市由高達50米的城牆所包圍著，以防止巨人的入侵，然而城牆最大的弱點是：人工建造的機關門，因此才讓敵人有機可趁，由超大型巨人和盔甲巨人率先破壞了牆內人民數百年來的安寧。</font></p>
+					</div>
+				</div>
+			</div>				
+		</div>	
+  
+		<div class="container">
+			<div class="row">
+				<div class="col s12 m4">
+					<div class="container">
+						<img class="materialboxed" src="images/MARIA.jpg">
+					</div>
+					<h5 class="center"><font color="#4C2F2F">瑪利亞之牆</font></h5>
+					<p class="light"><font color="#4C2F2F">瑪利亞之牆為島上人民的第一道防線(最外圍的城牆)，與羅塞之牆之間距離100公里，總長度約三千餘公里。主角三人組：艾連、米卡莎、阿爾敏的故鄉-希干希納區位於瑪利亞之牆的南部，在動畫第一集時(約845年)就被盔甲巨人及超大型巨人攻破，使純潔巨人大批進入城牆內，死傷慘重，使大部分的民眾必須遷離此區。</font></p>
+				</div>
+
+				<div class="col s12 m4">
+					<div class="container">
+						<img class="materialboxed" src="images/ROSE.jpg">
+					</div>
+					<h5 class="center"><font color="#4C2F2F">羅塞之牆</font></h5>
+					<p class="light"><font color="#4C2F2F">羅塞之牆為島上人民的第二道防線(中間的城牆)，與席納之牆距離約為130公里。有四個附屬的瓮城，分別為：卡拉涅斯區(東)、克羅魯巴區(西)、托洛斯特區(南)、烏托邦區(北)，其中托洛斯特區於850年遭超大型巨人踢毀城門而遭巨人入侵，隨後由擁有巨人之力的艾連搬起巨石將城門堵住，成為了人類首次戰勝巨人的地方。</font></p>
+				</div>
+
+				<div class="col s12 m4">
+					<div class="container">
+						<img class="materialboxed" src="images/SINA.jpg">
+					</div>
+					<h5 class="center"><font color="#4C2F2F">席納之牆</font></h5>
+					<p class="light"><font color="#4C2F2F">席納之牆為島上人民的最後一道防線(最內側的城牆)，與王都距離約為250公里，此區大多居住貴族及富有的商人。有四個附屬的瓮城，分別為：史托黑斯區(東)、亞克爾區(西)、艾米哈區(南)、歐爾布德區(北)，而王都米特拉斯位於中心位置。第57次壁外調查後調查兵團在史托黑斯區展開女巨人捉捕作戰，從被女巨人破損的牆中發現了活的大型巨人，由此推測牆壁是由巨人硬質化建立起來的。</font></p>
+				</div>
+			</div>
+		</div>
+	  
+		<!--  一些問題用Collapsible -->
+		<div class="container">
+			<div class="section">
+				<div class="row">
+					<div class="col s12 center">
+						<h5>關於進巨的一些問題，我的想法是...</h5>
+					</div>
+				</div>
+			  
+				<ul class="collapsible">
+					<li>
+					  <div class="collapsible-header"><i class="material-icons">local_fire_department</i>為什麼進擊的巨人能夠破圈?</div>
+					  <div class="collapsible-body"><span>「動畫化」是進擊的巨人能夠破圈的主要原因，也是這部作品的第二春。
+														而動化的形式之所以能夠更吸引人們的因是，在原著漫畫中因為只有黑白層次及線條可以區分人物，但是動畫能夠更凸顯各個角色的特徵，是觀看者能夠更進入角色的情緒當中。
+														再來就是題材的選擇，除了「自由」的探討之外，在族群衝突、仇恨循環的鋪陳及翻轉也顯現的相當精彩，使大部分世界上的人都能對這樣的故事內容產生共鳴。
+														最後就是故事的敘事手法，作者曾經說過他喜歡用不同的人物去講述同一個故事，如此一來讀者能夠以更多元的視角觀看一件事，並激起一番玩味，使大家更願意投入地討論故事內容。
+														</span></div>
+					</li>
+					<li>
+					  <div class="collapsible-header"><i class="material-icons">question_mark</i>始祖由米爾幫助艾連踏平世界，這樣的她究竟想得到什麼?</div>
+					  <div class="collapsible-body"><span>始祖尤米爾始終在盲目地追求人與人的羈絆-也就是她對王的愛，但是這份放不下的愛讓她千年來被困在一個通道內，卻繼續聽從王的命令不斷地製造巨人
+														，然而她等到了艾連及米卡莎，艾連承諾能夠幫助尤米爾確認她想知道的結果，也就是米卡莎最後的選擇-取下艾連的首級。尤彌爾身為"愛情"的奴隸，
+														看到米卡莎展現了她所作不到的「愛不能盲目，不能失去自我」，因此明白這場愛情的夢魘早在王被刺殺的那一刻就應該要結束了，她了解這份愛不一定要是從王身上得到，也可以從她的孩子身上得到，因此釋懷並解除了世界上的巨人之力。</span></div>
+					</li>
+					<li>
+					  <div class="collapsible-header"><i class="material-icons">favorite</i>關於進擊的巨人這部作品，我的感想是......</div>
+					  <div class="collapsible-body"><span>雖然結局的節奏偏快，沒有像前面的故事有很驚人的鋪陳、驚喜的伏筆或是驚嚇的翻轉，我認為更像是快刀斬亂麻要迅速滿足讀者對結局的好奇心，
+													像是我始終想不透的問題：米卡莎最終為何選擇要砍下艾連的頭來拯救世界？但並非如此這部劇就變得不完美，它在我心中的動漫地位還是位列第一，
+													最主要的原因是它能夠做到其他動漫做不到的，像是鋪成及伏筆的設計、許多隱喻及鏡象角色的對比，以及不斷翻轉我們對那個世界的世界觀及對我們的認知投放震撼彈，使讀者的心情能夠有起承轉合，
+													也從中看到最想追求自由的主角從來都不是自由的事實，與追求自由要付出的代價是多麼的慘痛，或許可以將這種同情心反映到現實的情況，對於烏俄戰爭、以巴戰爭，又或是還未發生的一些未知戰爭等。</span></div>
+					</li>
+			    </ul>
+			</div>
+		</div>
+	  
+	</section>
+
+<br><br>
+
+	<!--  banner2 -->
+	<div class="parallax-container valign-wrapper">
+		<div class="parallax"><img src="images/banner2.png" alt=""></div>
+	</div>
+ 
+<br><br id="section_3"><br><br>
+
+	<!--  角色介紹 -->
+    <div class="container center">
+      <h3>純潔巨人、人類角色</h3>
+    </div>
+	<section class="about section-padding">
+		<div class="container ">
+			<div class="row">
+				<div class="col s12 l1 center">
+				<p></p>
+				</div>
+			
+				<div class="col s12 m6 l4 center">
+				  <div class="card large">
+					<div class="card-image">
+					  <img src="images/stubid.jpg">
+					</div>
+					<div class="card-content">
+					  <p>純潔巨人(又稱為：無垢巨人)，純潔巨人的形成：瑪雷將有巨人脊髓液的藥劑打入艾爾迪亞人身體中。其特色是「沒有智慧」，依照巨人本能行動。純潔巨人可以被座標)操控或是聽到九到巨人的喊叫聲而行動。分為通常種與奇形種。</p>
+					</div>
+					<div class="card-action  center">
+					  <a href="https://youtu.be/MIuNhv_OXzk?si=igy6DfSX_VsBmvyR" target="_blank"><font size="4px">相關介紹影片</font></a>
+					</div>
+				  </div>
+				</div>
+			
+				<div class="col s12 l2 center">
+				<p></p>
+				</div>
+			
+				<div class="col s12 m6 l4 center">
+				  <div class="card large">
+					<div class="card-image">
+					  <img src="https://hips.hearstapps.com/hmg-prod/images/new-project-2022-01-10t114111-054-1641786088.jpg?crop=0.493xw:0.987xh;0,0&resize=640:*" style="max-width: 100%; max-height: 100%;">
+					</div>
+					<div class="card-content">
+					  <p>以下選12位在《進擊的巨人》中出場率較平繁或存活率較高的人類角色，其出場的時機以及對劇情的重要性勝過於其他未介紹的角色。</p>
+					</div>
+					<div class="card-action center">
+					  <a href="role.html"><font size="4px">查看更多角色介紹</font></a>
+					</div>
+				  </div>
+				</div>
+			
+				<div class="col s12 l1 center">
+				<p></p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+<br><br>
+
+	<!--  banner3 -->
+	<div class="parallax-container valign-wrapper">
+		<div class="parallax"><img src="images/banner3.jpg" alt=""></div>
+	</div>
+
+<br><br id="section_4"><br><br>
+
+	<!-- 九大巨人 -->
+    <div class="container center">
+      <h3>智慧巨人--九大巨人介紹</h3>
+    </div>
+	<section>
+		<div class='row' id="home">
+		</div>
+	</section>
+
+<br><br><br><br>
+
+	<!-- 頁尾 -->
+	<section class="about section-padding" id="section_5">
+		<footer class="page-footer" style="background-color: #A8DADC;">
+			<div class="container">
+				<div class="row">
+					<!-- 留言板 -->
+					<div class="col l6 s12">
+						<div class="row">
+							<div class="col s12 center">
+								<h5 class="black-text">來分享你對《進擊的巨人》的想法吧~</h5>
+							</div>
+						</div>
+						<form name="myform" action="javascript:formresponse();">
+							<div class="row">
+								<div class="col-12 center">
+									<textarea class="form-control" id="message" name="message" placeholder="Message" rows="7"></textarea>
+									<button class="btn" type="submit" value="Submit">提交</button>
+								</div>
+							</div>
+						</form>	
+					</div>
+				
+					<!-- 參考資料來源 -->
+					<div class="col l6 s12">
+					  <h5 class="black-text center">相關資料</h5>
+						<div class="row" style="display: flex; align-items: center; justify-content: center;">
+							<ul>
+								<li><a class="white-text source" href="https://forum.gamer.com.tw/C.php?bsn=43473&snA=13758" target="_blank">1.巴哈姆特：【最終季】致2023年後的你～巨人動畫</a></li>
+								<li><a class="white-text source" href="https://forum.gamer.com.tw/C.php?bsn=43473&snA=13758" target="_blank">完結編結局解析和常見問題釋疑</a></li>
+								<p></p>
+								<p></p>
+								<li><a class="white-text source" href="https://zh.wikipedia.org/zh-tw/%E9%80%B2%E6%93%8A%E7%9A%84%E5%B7%A8%E4%BA%BA%E4%B8%96%E7%95%8C%E8%A7%80%E8%A8%AD%E5%AE%9A%E5%8F%8A%E5%B0%88%E6%9C%89%E5%90%8D%E8%A9%9E%E5%88%97%E8%A1%A8#%E4%B8%89%E9%81%93%E5%9F%8E%E7%89%86" target="_blank">2.Wiki：進擊的巨人世界觀設定及專有名詞列表</a></li>
+								<p></p>
+								<p></p>
+								<li><a class="white-text source" href="https://www.savoirtw.org/article/4610" target="_blank">3.林寓森：創傷的抉擇：《進擊的巨人》</a></li>
+								<p></p>
+								<p></p>
+								<li><a class="white-text" href="https://shingekinokyojin.fandom.com/zh/wiki/%E9%80%B2%E6%93%8A%E7%9A%84%E5%B7%A8%E4%BA%BAwiki" target="_blank">4.進擊的巨人wiki</a></li
+							</ul>
+						</div>
+						<div class="center">
+							<a class="waves-effect btn" href="message.html">前往留言板</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="footer-copyright">
+				<div class="container">
+					<div class="row" style="display: flex; align-items: center; justify-content: center;">
+						<font face="MV Boli">© HTML :)</font>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</section>
+  
+  
+	<!--  init  -->
+	<script>
+	  $(document).ready(function(){
+		$('.parallax').parallax();
+		 $('.materialboxed').materialbox();
+		 $('.collapsible').collapsible();
+		 $('#textarea1').val('New Text');
+		M.textareaAutoResize($('#textarea1'));
+		
+			$(".click-scroll").on('click', function(event) {
+			if (this.hash !== "") {
+				event.preventDefault();
+
+				var hash = this.hash;
+
+				// 使用 jQuery 的 animate 方法来实现滑动效果
+				$('html, body').animate({
+					scrollTop: $(hash).offset().top
+					}, 800, function(){
+					window.location.hash = hash;  // 将锚点添加到 URL 中
+					});
+				}
+			});
+	  });
+	</script>
+  
+</body>
+
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>進擊的巨人</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="Content-Type" content="text/html"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+	
+	<!-- Owl Stylesheets -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.css">
+
+    <!-- javascript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.js"></script>
+  
+	<!-- Compiled and minified CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+	<!-- Compiled and minified JavaScript -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+	<!-- CSS  -->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+	<link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+
+
+	<script>
+		images = ["role/1.jpg",
+					"role/2.jpg",
+					"role/3.jpg",
+					"role/4.jpg",
+					"role/5.jpg",
+					"role/6.jpg",
+					"role/7.jpg",
+					"role/8.jpg",
+					"role/9.jpg",
+					"role/10.jpg",
+					"role/11.jpg",
+					"role/12.jpg"
+					]
+		Cname = ["艾連·葉卡", "米卡莎·阿卡曼", "阿爾敏·亞魯雷特", "里維·阿卡曼","艾爾文·史密斯","漢吉·佐耶","萊納·布朗","貝爾托特·胡佛","亞妮·雷恩哈特","希斯特莉亞·雷斯","吉克·葉卡","約翰·基爾休坦"]
+		Jname = ["エレン・イェーガー", "ミカサ・アッカーマン", "アルミン・アルレルト", "リヴァイ・アッカーマン","エルヴィン・スミス","ハンジ・ゾエ","ライナー・ブラウン","ベルトルト・フーバー","アニ・レオンハート","ヒストリア・レイス","ジーク・イェーガー","ジャン・キルシュタイン"]
+		introduces = ["出身於瑪利亞之牆南端的希干希納區，身高170cm，體重63kg，為故事中的男主角，是進擊的巨人的擁有者，其巨人之力是來自自己被藥劑巨人化後吃掉自己的老爸而來。擁有強韌的毅力與非凡的行動力。兒時受阿爾敏的影響，對牆壁外的世界擁有比任何人都要高的憧憬，也非常嚮往自由，從小便立志要加入調查軍團，以此能夠出去牆外探險。",
+						"出身於瑪利亞之牆南端的希干希納區，身高160cm，體重50kg，為故事中的女主角。因為父母慘遭殺害，從小就被艾連的父母收養，為艾連的青梅竹馬，兩人經常一起行動。為訓練兵團104期第1名畢業，身為阿卡曼族人擁有異於常人的優秀身體能力與戰鬥技術，其阿卡曼的開竅時機點在於拯救小時候的自己及艾連，變一刀刺死手持武器的大人。同時也有東洋人血統的她擁有美麗的外表。",
+						"出身於瑪利亞之牆南端的希干希納區，身高 163cm，體重55kg，為故事中的男二，後來繼承了貝爾托特的超大型巨人。因為憧憬牆外的世界，長大後便和艾連、米卡莎一起加入調查兵團，雖然前期個性有些膽小，但擁有聰慧過人的腦袋，後期在關鍵時刻下發揮很大的作用。在與野獸巨人的大戰中，里維面臨要救阿爾敏跟艾爾文的選擇中，決定要救與艾爾文一樣有驚人遠見的阿爾敏。",
+						"身高160cm，體重65kg。調查軍團的兵長，同時是軍團特別作戰小組班長。身高不高卻擁有「人類最強的士兵」之稱號，擁有強大的身體素質及耐力，可以以一檔百。雖然成天都擺著一字號表情，個性神經質又粗魯，令人難以接近，但卻是一個尊重上級且愛惜下屬的人。能夠顧全大局，作出當前最佳化的決策。而且有嚴重的潔癖。",
+						"身高188cm，體重92kg。為調查軍團第13屆團長，擁有過人的判斷力以及指揮能力，行動及考慮總是想得比任何人還要深遠。在最後在與野獸巨人的對戰中明知道自己會死掉，但卻無所畏懼地帶著所有的士兵向前送死，就為了得到更多有關巨人的更多真相。即使是看似有完美人格的團長也有不為人知自私的一面，他所做的每個犧牲，都只是為了滿足自己從小對這個政府所隱藏的秘密的好奇心。",
+						"身高170cm，體重60kg。原調查軍團分隊長之一，後為第14任調查軍團團長。可以說是一個怪人，對巨人有著狂熱的好奇心及熱情，在她研究的兩個巨人「賓」和「索尼」被別人殺死之後，變得極度傷心及失去理智，絲毫沒有一般人類見到巨人的恐懼感及看到巨人死掉時該有的正常反應。故事後半段的漢吉變得成熟且穩重的人，能夠對大局犧牲以拖延夥伴的逃亡時間。",
+						"身高185cm，體重95kg。為瑪雷戰士之一，是盔甲巨人的擁有者，在故事的設定中似乎把艾連和萊納作為鏡象的角色，十分有趣。疑似愛慕克里斯塔。表面上擁有強韌的體格和精神力，實際上他是外硬內軟，內心早已嚴重扭曲，有嚴重的人格分裂，常常會忘記自己的身分究竟臥底、還是原本就是出身在城牆內的人，即使回到瑪雷之後人就擺脫不了人格分裂及對自己曾經殺過的人感到愧疚，還想過要自殺。",
+						"身高192cm，體重81kg。為瑪雷戰士之一，是超大型巨人的前擁有者。疑似愛慕亞妮。個性比較懦弱且對很多事務缺乏積極性，和萊納在動畫的開頭便破壞了城牆，導致艾連母親被巨人吃掉。",
+						"身高153cm，體重54kg。為瑪雷戰士之一，是女巨人的擁有者。進入訓練兵團初期就以加入憲兵團為志願，方便間諜任務。由於父親從小就教她厲害的格鬥技巧，使她在剛進入訓練兵時期就已經擁有過人的戰鬥能力，與米卡莎匹敵。但個性沉默寡言，很少在他人面前透漏自己的情緒，因此也沒什麼人敢親近她。",
+						"身高145cm，體重42kg。克里斯塔的本名為希斯特莉亞·雷斯（ヒストリア・レイス），為貴族-雷斯家後裔，但卻因為是私生女的原因無法在家族中佔有一席之地，後來還因為捲入族人紛爭被迫隱姓埋名去當訓練兵。外表溫和謙遜，樂於助人，很替別人著想，但其實內心很空虛，在和尤米爾的相處下才逐漸了解自己想要什麼，之後在揭開自己的真實身分後成為了女王。",
+						"野獸巨人的擁有者，為艾連的同父異母兄長，從小就一面被父親古利夏灌輸艾爾迪亞復權派觀念，另一面則被祖父母灌輸艾爾迪亞惡魔論的歷史觀，在兩個互相矛盾的歷史觀中漸漸衍生出否定自己出生的想法，最後遇到人生導師-前代野獸巨人：庫沙瓦，才讓吉克有想利用始祖巨人完成艾爾迪亞安樂死計畫的想法。其身上擁有的王族血統結合始祖力量能夠引發大規模的地鳴，然而在說服始祖尤米爾的過程中被艾連搶得先機，因此未能達到自己的目的。",
+						"身高175cm，體重65kg。出身於羅塞之牆南端的托洛斯特區。進入訓練兵團初期以加入憲兵團為志願，但在托洛斯特區攻防戰中，因為摯友-馬可的死為他帶來極大的轉變，爾後轉為加入調查兵團。起初個性過於銳利，與隊友容易產生衝突，且暗戀米卡莎因此特別看艾連不順眼，也曾為此吃醋跟艾連大打出手，但後期的他有不錯的指揮能力跟冷靜思考的特質，適合擔任領導者的角色。"
+		]
+		function f()
+		{
+			var s = '';
+			for (let i = 0; i < images.length; i++) {
+				s+=`<div class="container">
+							<div class="col s12 m6 l4 center">
+								<div class="card large">
+									<div class="card-image waves-effect waves-block waves-light">
+										<img class="activator" src="${images[i]}" "width="350"height="350">
+									</div>
+									<div class="card-content">
+										<span class="card-title activator grey-text text-darken-4"> ${Cname[i]} <i class="material-icons right">more_vert</i></span>
+										<p> ${Jname[i]}</p>
+									</div>	
+									<div class="card-reveal">
+										<span class="card-title grey-text text-darken-4"> ${Cname[i]} <i class="material-icons right">close</i></span>
+										<p> ${introduces[i]} </p>
+									</div>
+								</div>
+							</div>
+					</div>`;
+				}
+			document.getElementById("role").innerHTML = s ;
+		}
+		window.onload = f;
+	</script>	
+	
+	<style>
+	  .parallax-container {
+		display: flex;
+		align-items: center; 
+		justify-content: center; 
+		height: 100vh; 
+	  }
+
+	  .section {
+		text-align: center;
+	  }
+	  
+	   .container {
+		width: 100%; 
+	  }
+
+	  h1 {
+		white-space: nowrap; 
+	  }
+	</style>
+	
+</head>
+
+<body>
+	<!--   頭   -->
+	<div class="navbar-fixed">
+	  <nav style="background-color: #A8DADC;" role="navigation">
+		<div class="nav-wrapper container">
+		  <a href="home.html" class="brand-logo center">進撃の巨人</a>
+		</div>
+	  </nav>
+	</div>
+
+	<!--   banner   -->
+	<div class="parallax-container valign-wrapper">
+		<div class="section no-pad-bot">
+		  <div class="container">
+			<h1 class="center"><font color="#FFFFFF"><b>角色介紹</b></font></h1>
+		  </div>
+		</div>
+		<div class="parallax"><img src="role/banner.jpg"></div>
+	</div>
+
+<br><br><br>
+
+	<!--  角色卡片展示  -->
+	<div class='row' id="role">
+	</div>
+
+<br><br><br>
+
+
+	<!-- 頁尾 -->
+	<footer class="page-footer" style="background-color: #A8DADC;">
+		<div class="container">
+			<div class="row">
+			  <!-- 參考資料來源 -->
+			  <h5 class="black-text center">相關資料</h5>
+				<div class="row" style="display: flex; align-items: center; justify-content: center;">
+					<ul>
+						<li><a class="white-text source" href="https://forum.gamer.com.tw/C.php?bsn=43473&snA=13758" target="_blank">1.巴哈姆特：【最終季】致2023年後的你～巨人動畫</a></li>
+						<li><a class="white-text source" href="https://forum.gamer.com.tw/C.php?bsn=43473&snA=13758" target="_blank">完結編結局解析和常見問題釋疑</a></li>
+						<p></p>
+						<p></p>
+						<li><a class="white-text source" href="https://zh.wikipedia.org/zh-tw/%E9%80%B2%E6%93%8A%E7%9A%84%E5%B7%A8%E4%BA%BA%E4%B8%96%E7%95%8C%E8%A7%80%E8%A8%AD%E5%AE%9A%E5%8F%8A%E5%B0%88%E6%9C%89%E5%90%8D%E8%A9%9E%E5%88%97%E8%A1%A8#%E4%B8%89%E9%81%93%E5%9F%8E%E7%89%86" target="_blank">2.Wiki：進擊的巨人世界觀設定及專有名詞列表</a></li>
+						<p></p>
+						<p></p>
+						<li><a class="white-text source" href="https://www.savoirtw.org/article/4610" target="_blank">3.林寓森：創傷的抉擇：《進擊的巨人》</a></li>
+						<p></p>
+						<p></p>
+						<li><a class="white-text" href="https://shingekinokyojin.fandom.com/zh/wiki/%E9%80%B2%E6%93%8A%E7%9A%84%E5%B7%A8%E4%BA%BAwiki" target="_blank">4.進擊的巨人wiki</a></li
+					</ul>
+				</div>
+			</div>
+		</div>
+		
+		<div class="footer-copyright">
+			<div class="container">
+				<div class="row" style="display: flex; align-items: center; justify-content: center;">
+					<font face="MV Boli">© HTML :)</font>
+				</div>
+			</div
+		</div>
+	</footer>
+
+  
+  
+  <!--初始化-->
+  <script>
+	  $(document).ready(function(){
+		$('.parallax').parallax();
+		 var owl = $('.owl-carousel');
+			owl.owlCarousel({
+			items: 4,
+			loop: true,
+			margin: 10,
+			autoplay: true,
+			autoplayTimeout: 2000,
+			autoplayHoverPause: true
+			});
+	  });
+  </script>
+  
+</body>
+  
+</html>
